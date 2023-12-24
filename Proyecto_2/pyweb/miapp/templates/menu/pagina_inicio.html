@@ -1,0 +1,28 @@
+<!-- pagina_inicio.html -->
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Inicio</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'estilos.css' %}">
+</head>
+<body>
+
+    <header>
+        <h1>Bienvenido a Ventas IPC2</h1>
+    </header>
+
+    <!-- Menú de Navegación -->
+    <nav>
+        <ul>
+            <li><a href="{% url 'lista_productos' %}">Lista de Productos</a></li>
+            <li><a href="{% url 'lista_clientes' %}">Lista de Clientes</a></li>
+            <!-- Agrega más opciones según tus necesidades -->
+        </ul>
+    </nav>
+
+</body>
+</html>

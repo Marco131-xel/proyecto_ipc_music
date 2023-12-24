@@ -1,0 +1,89 @@
+<!-- base.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'esti_ap.css' %}">
+    <title>Página Lista</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #336699;
+            padding: 10px;
+            text-align: center;
+            color: white;
+        }
+
+        nav {
+            background-color: #336699;
+            padding: 10px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        nav li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+        }
+
+        section {
+            padding: 20px;
+        }
+
+        footer {
+            background-color: #336699;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Lista de Productos</h1>
+    </header>
+
+    <!-- Menú de Navegación -->
+    <nav>
+        <ul>
+            <li><a href="{% url 'lista_productos' %}">Lista de Productos</a></li>
+            <li><a href="{% url 'lista_clientes' %}">Lista de Clientes</a></li>
+            <!-- Agrega más opciones según tus necesidades -->
+        </ul>
+    </nav>
+
+    <!-- Contenido de la página -->
+    <section>
+        {% block content %}{% endblock %}
+    </section>
+
+    <!-- Pie de página -->
+    <footer>
+        © 2023 Mi Empresa XD. Todos los derechos reservados.
+    </footer>
+
+</body>
+</html>
