@@ -1,8 +1,9 @@
 from django.urls import path
 from .views import pagina_inicio
 from .views import (
-    lista_productos, detalle_producto, nuevo_producto, editar_producto, eliminar_producto, 
-    lista_clientes, detalle_cliente, nuevo_cliente, editar_cliente, eliminar_cliente
+    lista_productos, detalle_producto, nuevo_producto, editar_producto, eliminar_producto, lista_clientes,
+    detalle_cliente, nuevo_cliente, editar_cliente, eliminar_cliente, crear_factura, guardar_factura, lista_facturas,
+    detalle_factura, eliminar_factura
 )
 
 urlpatterns = [
@@ -20,4 +21,14 @@ urlpatterns = [
     path('cliente/nuevo/', nuevo_cliente, name='nuevo_cliente'),
     path('cliente/editar/<int:pk>/', editar_cliente, name='editar_cliente'),
     path('cliente/eliminar/<int:pk>/', eliminar_cliente, name='eliminar_cliente'),
+    
+    # Urls para las facturas
+    path('factura/crear/', crear_factura, name='crear_factura'),
+    path('guardar_factura/', guardar_factura, name='guardar_factura'),
+
+    path('detalle_factura/<int:pk>/', detalle_factura, name='detalle_factura'),
+    path('factura/lista/', lista_facturas, name='lista_facturas'),
+    path('factura/editar/<int:pk>/', detalle_factura, name='editar_factura'),  
+    path('factura/eliminar/<int:pk>/', eliminar_factura, name='eliminar_factura'),  
+    
 ]

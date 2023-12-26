@@ -1,0 +1,20 @@
+<!-- eliminar_cliente.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Eliminar Cliente</h2>
+
+    <!-- Muestra la información del cliente -->
+    <p>¿Estás seguro de que deseas eliminar al cliente {{ cliente.nombre }} con NIT {{ cliente.nit }} y dirección {{ cliente.direccion }}?</p>
+
+    <!-- Formulario de eliminación -->
+    <form method="post" action="{% url 'eliminar_cliente' pk=cliente.pk %}">
+        {% csrf_token %}
+        <input type="submit" value="Eliminar" class="btn-eliminar">
+    </form>
+
+    <!-- Botón de cancelar -->
+    <a href="{% url 'lista_clientes' %}" class="btn-cancelar">Cancelar</a>
+
+{% endblock %}

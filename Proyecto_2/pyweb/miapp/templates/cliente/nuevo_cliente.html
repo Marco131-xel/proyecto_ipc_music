@@ -1,0 +1,14 @@
+<!-- nuevo_cliente.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Agregar Nuevo Cliente</h2>
+
+    <form method="post" class="cliente-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Guardar Cliente</button>
+    </form>
+
+    <a href="{% url 'lista_clientes' %}">Volver a la lista de clientes</a>
+{% endblock %}

@@ -1,0 +1,78 @@
+/* esti_boto.css */
+ul.productos-lista {
+    list-style: none;
+    padding: 0;
+}
+
+ul.productos-lista li {
+    margin-bottom: 10px; /* Reducir el espacio entre elementos */
+}
+
+ul.productos-lista li a {
+    display: inline-block;
+    margin-right: 10px;
+    padding: 6px 8px; /* Reducir el tamaño del botón */
+    background-color: #4CAF50; /* Cambiar a verde */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px; /* Hacer que las esquinas sean redondeadas */
+}
+
+ul.productos-lista li a:hover {
+    background-color: #45a049; /* Cambiar el color al pasar el mouse */
+}
+
+/* Estilos para botones en lista_clientes */
+.cliente-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Alinea los elementos a la izquierda */
+}
+
+a.cliente-btn {
+    display: inline-block;
+    margin-right: 10px;
+    padding: 6px 10px;
+    background-color: #4CAF50; /* Verde */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px; /* Bordes redondeados */
+}
+
+a.cliente-btn:hover {
+    background-color: #45a049; /* Cambio de color al pasar el mouse */
+}
+
+/* Estilos para botones de detalle_cliente */
+a.detalle-cliente-btn {
+    display: inline-block;
+    margin-right: 10px;
+    padding: 6px 10px;
+    background-color: #4CAF50; /* Verde */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px; /* Bordes redondeados */
+}
+
+a.detalle-cliente-btn:hover {
+    background-color: #45a049; /* Cambio de color al pasar el mouse */
+}
+
+/* Estilo para el botón de eliminar */
+.btn-eliminar {
+    background-color: #ff3333; /* Rojo */
+    color: white;
+    padding: 8px 12px;
+    text-decoration: none;
+    border-radius: 5px; /* Bordes redondeados */
+    margin-right: 10px; /* Espaciado entre botones */
+}
+
+/* Estilo para el botón de cancelar */
+.btn-cancelar {
+    background-color: #4CAF50; /* Verde */
+    color: white;
+    padding: 8px 12px;
+    text-decoration: none;
+    border-radius: 5px; /* Bordes redondeados */
+}

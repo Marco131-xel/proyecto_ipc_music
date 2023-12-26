@@ -1,0 +1,43 @@
+<!-- detalle_factura.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Detalles de la Factura</h2>
+
+    <!-- Información General de la Factura -->
+    <div class="factura-info">
+        <h3>Información General</h3>
+        <p><strong>Factura ID:</strong> {{ factura.id }}</p>
+        <p><strong>Cliente:</strong> {{ factura.cliente.nombre }}</p>
+        <p><strong>Fecha:</strong> {{ factura.fecha }}</p>
+        <p><strong>Total:</strong> {{ factura.total }}</p>
+    </div>
+
+    <!-- Detalle de Productos en la Factura -->
+    <div class="factura-detalle">
+        <h3>Detalle de Productos</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for detalle in factura.detallefactura_set.all %}
+                    <tr>
+                        <td>{{ detalle.producto.nombre }}</td>
+                        <td>{{ detalle.cantidad }}</td>
+                        <td>{{ detalle.subtotal }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Otras secciones, como información de envío, método de pago, etc., según tus necesidades -->
+
+    <!-- Enlace para volver a la lista de facturas -->
+    <a href="{% url 'lista_facturas' %}" class="btn-volver">Volver a la Lista de Facturas</a>
+{% endblock %}

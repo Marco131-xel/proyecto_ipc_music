@@ -1,0 +1,16 @@
+<!-- detalle_cliente.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Detalles del Cliente</h2>
+
+    <ul>
+        <li><strong>NIT:</strong> {{ cliente.nit }}</li>
+        <li><strong>Nombre:</strong> {{ cliente.nombre }}</li>
+        <li><strong>Dirección:</strong> {{ cliente.direccion }}</li>
+    </ul>
+
+    <a href="{% url 'editar_cliente' pk=cliente.pk %}" class="detalle-cliente-btn">Editar Cliente</a> |
+    <a href="{% url 'eliminar_cliente' pk=cliente.pk %}" class="detalle-cliente-btn">Eliminar Cliente</a> |
+    <a href="{% url 'lista_clientes' %}" class="detalle-cliente-btn">Volver a la lista de clientes</a>
+{% endblock %}

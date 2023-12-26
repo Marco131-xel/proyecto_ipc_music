@@ -5,6 +5,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- prueba-->
+    <link rel="stylesheet" type="text/css" href="{% static 'esti_boto.css' %}">
     <link rel="stylesheet" href="{% static 'esti_ap.css' %}">
     <title>Página Lista</title>
     <style>
@@ -58,12 +60,19 @@
             bottom: 0;
             width: 100%;
         }
+        
+        .factura-link {
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+            margin-right: 20px;
+        }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>Lista de Productos</h1>
+        <h1>Tienda IPC 2</h1>
     </header>
 
     <!-- Menú de Navegación -->
@@ -71,6 +80,7 @@
         <ul>
             <li><a href="{% url 'lista_productos' %}">Lista de Productos</a></li>
             <li><a href="{% url 'lista_clientes' %}">Lista de Clientes</a></li>
+            <li><a href="{% url 'lista_facturas' %}" class="factura-link">Lista de Facturas</a></li> 
             <!-- Agrega más opciones según tus necesidades -->
         </ul>
     </nav>

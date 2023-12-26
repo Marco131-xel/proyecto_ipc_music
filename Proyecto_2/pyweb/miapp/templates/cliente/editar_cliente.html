@@ -1,0 +1,19 @@
+<!-- editar_cliente.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Editar Cliente</h2>
+
+    <!-- Formulario de edición de cliente -->
+    <form method="post" action="{% url 'editar_cliente' pk=cliente.pk %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <!-- Botón de guardar cambios -->
+        <input type="submit" value="Guardar cambios" class="btn-guardar">
+    </form>
+
+    <!-- Botón de cancelar -->
+    <a href="{% url 'detalle_cliente' pk=cliente.pk %}" class="btn-cancelar">Cancelar</a>
+{% endblock %}
