@@ -1,0 +1,18 @@
+<!-- eliminar_factura.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Eliminar Factura #{{ factura.pk }}</h2>
+
+    <p>¿Estás seguro de que deseas eliminar esta factura?</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <input type="submit" value="Sí, eliminar factura" class="btn eliminar-factura-btn">
+    </form>    
+
+    <br>
+
+    <!-- Botón de regreso -->
+    <a href="{% url 'lista_facturas' %}" class="factura-link btn">Cancelar y Regresar a la Lista de Facturas</a>
+{% endblock %}

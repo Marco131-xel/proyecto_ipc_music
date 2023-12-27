@@ -2,42 +2,40 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h2>Detalles de la Factura</h2>
+    <h2>Detalles de la Factura #{{ factura.pk }}</h2>
 
-    <!-- Información General de la Factura -->
-    <div class="factura-info">
-        <h3>Información General</h3>
-        <p><strong>Factura ID:</strong> {{ factura.id }}</p>
-        <p><strong>Cliente:</strong> {{ factura.cliente.nombre }}</p>
-        <p><strong>Fecha:</strong> {{ factura.fecha }}</p>
-        <p><strong>Total:</strong> {{ factura.total }}</p>
-    </div>
+    <p><strong>Cliente:</strong> {{ factura.cliente.nombre }} (NIT: {{ factura.cliente.nit }})</p>
+    <p><strong>Dirección del Cliente:</strong> {{ factura.cliente.direccion }}</p>
+    <p><strong>Fecha:</strong> {{ factura.fecha }}</p>
 
-    <!-- Detalle de Productos en la Factura -->
-    <div class="factura-detalle">
-        <h3>Detalle de Productos</h3>
-        <table>
-            <thead>
+    <h3>Productos:</h3>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Descripción</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for detalle in detalles %}
                 <tr>
-                    <th>Producto</th>
-                    <th>Cantidad</th>
-                    <th>Subtotal</th>
+                    <td>{{ detalle.producto.nombre }}</td>
+                    <td>{{ detalle.producto.descripcion }}</td>
+                    <td>{{ detalle.producto.precio }}</td>
+                    <td>{{ detalle.cantidad }}</td>
+                    <td>{{ detalle.subtotal }}</td>
                 </tr>
-            </thead>
-            <tbody>
-                {% for detalle in factura.detallefactura_set.all %}
-                    <tr>
-                        <td>{{ detalle.producto.nombre }}</td>
-                        <td>{{ detalle.cantidad }}</td>
-                        <td>{{ detalle.subtotal }}</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+            {% endfor %}
+        </tbody>
+    </table>
 
-    <!-- Otras secciones, como información de envío, método de pago, etc., según tus necesidades -->
+    <p><strong>Total:</strong> {{ total_factura }}</p>
 
-    <!-- Enlace para volver a la lista de facturas -->
-    <a href="{% url 'lista_facturas' %}" class="btn-volver">Volver a la Lista de Facturas</a>
+    <br>
+
+    <!-- Botón de regreso -->
+    <a href="{% url 'lista_facturas' %}" class="factura-link btn">Regresar a la Lista de Facturas</a>
 {% endblock %}

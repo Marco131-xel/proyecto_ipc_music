@@ -3,46 +3,39 @@
 
 {% block content %}
     <h2>Lista de Facturas</h2>
-
+    
     <!-- Menú de Opciones -->
     <nav>
         <ul>
-            <li><a href="{% url 'crear_factura' %}">Crear Factura</a></li>
+            <li><a href="{% url 'crear_factura' %}" class="factura-link">Crear Factura</a></li>
             <!-- Agrega más opciones según tus necesidades -->
         </ul>
     </nav>
 
-    <!-- Lista de Facturas -->
-    <div class="facturas-list">
-        {% if facturas %}
-            <table>
-                <thead>
-                    <tr>
-                        <th>Factura</th>
-                        <th>Cliente</th>
-                        <th>Fecha</th>
-                        <th>Total</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for factura in facturas %}
-                        <tr>
-                            <td>{{ factura.id }}</td>
-                            <td>{{ factura.cliente.nombre }}</td>
-                            <td>{{ factura.fecha|date:"d/m/Y" }}</td>
-                            <td>{{ factura.total }}</td>
-                            <td>
-                                <a href="{% url 'detalle_factura' pk=factura.pk %}" class="factura-btn">Detalles</a>
-                                <a href="{% url 'editar_factura' pk=factura.pk %}" class="factura-btn">Editar</a>
-                                <a href="{% url 'eliminar_factura' pk=factura.pk %}" class="factura-btn">Eliminar</a>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        {% else %}
-            <p>No hay facturas disponibles.</p>
-        {% endif %}
-    </div>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Número de Factura</th>
+                <th>Cliente</th>
+                <th>Fecha</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for factura in facturas %}
+                <tr>
+                    <td>{{ factura.pk }}</td>
+                    <td>{{ factura.cliente.nombre }}</td>
+                    <td>{{ factura.fecha }}</td>
+                    <td>
+                        <a href="{% url 'detalle_factura' pk=factura.pk %}">Ver Detalles</a> |
+                        <a href="{% url 'editar_factura' pk=factura.pk %}">Editar</a> |
+                        <a href="{% url 'eliminar_factura' pk=factura.pk %}">Eliminar</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{% url 'crear_factura' %}" class="factura-link">Crear Nueva Factura</a>
 {% endblock %}

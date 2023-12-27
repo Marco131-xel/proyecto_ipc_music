@@ -2,12 +2,12 @@ from django.urls import path
 from .views import pagina_inicio
 from .views import (
     lista_productos, detalle_producto, nuevo_producto, editar_producto, eliminar_producto, lista_clientes,
-    detalle_cliente, nuevo_cliente, editar_cliente, eliminar_cliente, crear_factura, guardar_factura, lista_facturas,
+    detalle_cliente, nuevo_cliente, editar_cliente, eliminar_cliente, crear_factura, editar_factura, lista_facturas,
     detalle_factura, eliminar_factura
 )
 
 urlpatterns = [
-    path('miapp/', pagina_inicio, name='pagina_inicio'),
+    path('', pagina_inicio, name='pagina_inicio'),
     # URLs para los productos
     path('productos/', lista_productos, name='lista_productos'),
     path('producto/<int:pk>/', detalle_producto, name='detalle_producto'),
@@ -22,13 +22,11 @@ urlpatterns = [
     path('cliente/editar/<int:pk>/', editar_cliente, name='editar_cliente'),
     path('cliente/eliminar/<int:pk>/', eliminar_cliente, name='eliminar_cliente'),
     
-    # Urls para las facturas
-    path('factura/crear/', crear_factura, name='crear_factura'),
-    path('guardar_factura/', guardar_factura, name='guardar_factura'),
-
-    path('detalle_factura/<int:pk>/', detalle_factura, name='detalle_factura'),
-    path('factura/lista/', lista_facturas, name='lista_facturas'),
-    path('factura/editar/<int:pk>/', detalle_factura, name='editar_factura'),  
-    path('factura/eliminar/<int:pk>/', eliminar_factura, name='eliminar_factura'),  
+    # URLs para facturas
+    path('facturas/', lista_facturas, name='lista_facturas'),
+    path('facturas/<int:pk>/', detalle_factura, name='detalle_factura'),  
+    path('facturas/nueva/', crear_factura, name='crear_factura'),
+    path('facturas/editar/<int:pk>/', editar_factura, name='editar_factura'),
+    path('facturas/eliminar/<int:pk>/', eliminar_factura, name='eliminar_factura'),
     
 ]

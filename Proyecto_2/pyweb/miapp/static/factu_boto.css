@@ -1,0 +1,36 @@
+/* styles.css */
+
+/* Estilos para los botones */
+.btn {
+    display: inline-block;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    background-color: #4CAF50;  /* Verde para otros botones */
+    color: white;
+    border: 1px solid #4CAF50;  /* Verde para otros botones */
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #45a049;  /* Verde oscuro en hover para otros botones */
+}
+
+/* Estilos específicos para los enlaces de factura */
+.factura-link {
+    margin-right: 20px;
+}
+
+/* Estilos específicos para el botón de eliminar factura (rojo) */
+.eliminar-factura-btn {
+    background-color: #ff4d4d;  /* Rojo */
+    border: 1px solid #ff4d4d;  /* Rojo */
+}
+
+.eliminar-factura-btn:hover {
+    background-color: #cc0000;  /* Rojo oscuro en hover */
+}
+
+/* Agrega más estilos según sea necesario */

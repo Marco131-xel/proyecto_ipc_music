@@ -4,66 +4,13 @@
 {% block content %}
     <h2>Crear Nueva Factura</h2>
 
-    <!-- Contenido del formulario para crear la factura -->
-    <form method="post" action="{% url 'guardar_factura' %}">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
+        {{ factura_form.as_p }}
+        {{ detalle_form.as_p }}
 
-        <!-- Campos del maestro (información general de la factura) -->
-        <label for="id_cliente-nit">Cliente:</label>
-        <select name="cliente-nit" id="id_cliente-nit">
-            {% for cliente in clientes %}
-                <option value="{{ cliente.id }}">{{ cliente.nombre }}</option>
-            {% endfor %}
-        </select>
-        <br>
-
-        <label for="fecha">Fecha:</label>
-        <input type="date" name="fecha" id="fecha" required>
-        <br>
-
-        <!-- Campos del detalle (productos en la factura) -->
-        <h3>Detalle de la Factura:</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>Producto</th>
-                    <th>Cantidad</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        <select name="productos[]" required>
-                            {% for producto in productos %}
-                                <option value="{{ producto.id }}">{{ producto.nombre }}</option>
-                            {% endfor %}
-                        </select>
-                    </td>
-                    <td>
-                        <input type="number" name="cantidades[]" required>
-                    </td>
-                </tr>
-                <!-- Puedes agregar más filas utilizando un bucle de formset en lugar de duplicar código -->
-                {% for i in formset %}
-                    <tr>
-                        <td>
-                            <select name="productos[]" required>
-                                {% for producto in productos %}
-                                    <option value="{{ producto.id }}">{{ producto.nombre }}</option>
-                                {% endfor %}
-                            </select>
-                        </td>
-                        <td>
-                            <input type="number" name="cantidades[]" required>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-
-        <br>
         <input type="submit" value="Guardar Factura">
     </form>
 
-    <a href="{% url 'lista_facturas' %}" class="btn-cancelar">Cancelar</a>
+    <a href="{% url 'lista_facturas' %}" class="factura-link">Volver a la Lista de Facturas</a>
 {% endblock %}

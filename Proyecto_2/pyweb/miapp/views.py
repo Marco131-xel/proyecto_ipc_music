@@ -87,63 +87,7 @@ def eliminar_cliente(request, pk):
 
     return render(request, 'cliente/eliminar_cliente.html', {'cliente': cliente})
 
-# Funciones para las Facturas
-def crear_factura(request):
-    productos = Producto.objects.all()
-
-    if request.method == 'POST':
-        print(request.POST)
-        cliente_form = ClienteForm(request.POST, prefix='cliente')
-        factura_form = FacturaForm(request.POST, prefix='factura')
-        detalle_form = DetalleFacturaForm(request.POST, prefix='detalle')
-
-        if cliente_form.is_valid() and factura_form.is_valid() and detalle_form.is_valid():
-            cliente = cliente_form.save()
-            factura = factura_form.save(commit=False)
-            factura.cliente = cliente
-            factura.save()
-
-            detalle = detalle_form.save(commit=False)
-            detalle.factura = factura
-            detalle.save()
-
-            return redirect('detalle_factura', pk=factura.pk)
-    else:
-        cliente_form = ClienteForm(prefix='cliente')
-        factura_form = FacturaForm(prefix='factura')
-        detalle_form = DetalleFacturaForm(prefix='detalle')
-
-    return render(request, 'factura/crear_factura.html', {
-        'cliente_form': cliente_form,
-        'factura_form': factura_form,
-        'detalle_form': detalle_form,
-        'clientes': Cliente.objects.all(),
-        'productos': productos,
-    })
-    
-def guardar_factura(request):
-    if request.method == 'POST':
-        factura_form = FacturaForm(request.POST)
-        detalle_formset = DetalleFacturaForm(request.POST, prefix='detalle')
-
-        if factura_form.is_valid() and detalle_formset.is_valid():
-            factura = factura_form.save()
-            detalle_formset.instance = factura  # Asocia el detalle con la factura recién creada
-            detalle_formset.save()
-
-            # Redirige a la página de detalles de la factura
-            return redirect('detalle_factura', pk=factura.pk)
-
-    else:
-        factura_form = FacturaForm()
-        detalle_formset = DetalleFacturaForm(prefix='detalle')
-
-    return render(request, 'factura/crear_factura.html', {
-        'factura_form': factura_form,
-        'detalle_formset': detalle_formset,
-        'clientes': Cliente.objects.all(),
-        'productos': Producto.objects.all(),
-    })
+# Funciones para Listas para las facturas
 
 def lista_facturas(request):
     facturas = Factura.objects.all()
@@ -151,36 +95,62 @@ def lista_facturas(request):
 
 def detalle_factura(request, pk):
     factura = get_object_or_404(Factura, pk=pk)
-    detalle = DetalleFactura.objects.filter(factura=factura)
+    detalles = DetalleFactura.objects.filter(factura=factura)
 
-    if request.method == 'POST':
-        factura_form = FacturaForm(request.POST, instance=factura)
-        detalle_form = DetalleFacturaForm(request.POST, prefix='detalle')
+    # Calcula el total de la factura sumando los subtotales de cada detalle
+    total_factura = sum(detalle.subtotal for detalle in detalles)
+
+    return render(request, 'factura/detalle_factura.html', {'factura': factura, 'detalles': detalles, 'total_factura': total_factura})
+
+def crear_factura(request):
+    if request.method == "POST":
+        # Creamos el formulario de la factura
+        factura_form = FacturaForm(request.POST)
+        detalle_form = DetalleFacturaForm(request.POST)
 
         if factura_form.is_valid() and detalle_form.is_valid():
-            factura_form.save()
+            # Guardamos la factura sin commit para poder asignar el cliente después
+            factura = factura_form.save(commit=False)
 
+            # Asignamos el cliente
+            cliente_id = request.POST.get('cliente')
+            cliente = get_object_or_404(Cliente, pk=cliente_id)
+            factura.cliente = cliente
+            factura.save()
+
+            # Guardamos el detalle de la factura
             detalle = detalle_form.save(commit=False)
             detalle.factura = factura
             detalle.save()
 
             return redirect('detalle_factura', pk=factura.pk)
-
     else:
-        factura_form = FacturaForm(instance=factura)
-        detalle_form = DetalleFacturaForm(prefix='detalle')
+        factura_form = FacturaForm()
+        detalle_form = DetalleFacturaForm()
 
-    return render(request, 'factura/detalle_factura.html', {
-        'factura': factura,
-        'factura_form': factura_form,
-        'detalle_form': detalle_form,
-        'detalle': detalle,
-    })
+    return render(request, 'factura/crear_factura.html', {'factura_form': factura_form, 'detalle_form': detalle_form})
+
+def editar_factura(request, pk):
+    factura = get_object_or_404(Factura, pk=pk)
+
+    if request.method == "POST":
+        form = FacturaForm(request.POST, instance=factura)
+        if form.is_valid():
+            form.save()
+            return redirect('detalle_factura', pk=factura.pk)
+    else:
+        form = FacturaForm(instance=factura)
+
+    return render(request, 'factura/editar_factura.html', {'form': form, 'factura': factura})
 
 def eliminar_factura(request, pk):
     factura = get_object_or_404(Factura, pk=pk)
-    factura.delete()
-    return redirect('lista_facturas')
+
+    if request.method == "POST":
+        factura.delete()
+        return redirect('lista_facturas')
+
+    return render(request, 'factura/eliminar_factura.html', {'factura': factura})
 
 # miapp
 def pagina_inicio(request):

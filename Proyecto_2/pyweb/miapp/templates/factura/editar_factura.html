@@ -1,0 +1,33 @@
+<!-- editar_factura.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Editar Factura #{{ factura.pk }}</h2>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <!-- Campos de edición de la factura -->
+        <label for="{{ factura_form.cliente.id_for_label }}">Cliente:</label>
+        {{ factura_form.cliente }}
+        
+        <!-- Añade más campos según sea necesario -->
+        
+        <!-- Campos de edición de los detalles -->
+        {% for detalle_form in detalle_forms %}
+            <hr>
+            <label for="{{ detalle_form.producto.id_for_label }}">Producto:</label>
+            {{ detalle_form.producto }}
+            
+            <label for="{{ detalle_form.cantidad.id_for_label }}">Cantidad:</label>
+            {{ detalle_form.cantidad }}
+        {% endfor %}
+
+        <input type="submit" value="Guardar Cambios">
+    </form>
+
+    <br>
+
+    <!-- Botón de regreso -->
+    <a href="{% url 'lista_facturas' %}" class="factura-link btn">Cancelar y Regresar a la Lista de Facturas</a>
+{% endblock %}

@@ -23,5 +23,5 @@ urlpatterns = [
     path('saludo/', saludo),
     path('xd/', xd),
     
-    path('miapp/', include('miapp.urls')),
+    path('', include('miapp.urls')),
 ]
