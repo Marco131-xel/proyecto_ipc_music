@@ -8,14 +8,14 @@
     <nav>
         <ul>
             <li><a href="{% url 'crear_factura' %}" class="factura-link">Crear Factura</a></li>
-            <!-- Agrega más opciones según tus necesidades -->
+            <!-- Para ver numero de factura #{{ factura.pk }} -->
         </ul>
     </nav>
 
     <table border="1">
         <thead>
             <tr>
-                <th>Número de Factura</th>
+                <th>Nit</th>
                 <th>Cliente</th>
                 <th>Fecha</th>
                 <th>Acciones</th>
@@ -24,7 +24,7 @@
         <tbody>
             {% for factura in facturas %}
                 <tr>
-                    <td>{{ factura.pk }}</td>
+                    <td>{{ factura.cliente.nit }}</td>
                     <td>{{ factura.cliente.nombre }}</td>
                     <td>{{ factura.fecha }}</td>
                     <td>
@@ -37,5 +37,4 @@
         </tbody>
     </table>
 
-    <a href="{% url 'crear_factura' %}" class="factura-link">Crear Nueva Factura</a>
 {% endblock %}

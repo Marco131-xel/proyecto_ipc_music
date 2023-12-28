@@ -21,6 +21,7 @@
 /* Estilos específicos para los enlaces de factura */
 .factura-link {
     margin-right: 20px;
+    color: #45a049;
 }
 
 /* Estilos específicos para el botón de eliminar factura (rojo) */

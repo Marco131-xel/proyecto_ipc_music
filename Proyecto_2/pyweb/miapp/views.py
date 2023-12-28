@@ -132,16 +132,26 @@ def crear_factura(request):
 
 def editar_factura(request, pk):
     factura = get_object_or_404(Factura, pk=pk)
+    detalles = DetalleFactura.objects.filter(factura=factura)
 
     if request.method == "POST":
-        form = FacturaForm(request.POST, instance=factura)
-        if form.is_valid():
-            form.save()
+        detalle_form = DetalleFacturaForm(request.POST)
+
+        if detalle_form.is_valid():
+            # Actualiza los campos de producto y cantidad
+            factura_detalle = detalles.first()  # Suponemos que hay solo un detalle por factura
+            factura_detalle.producto = detalle_form.cleaned_data['producto']
+            factura_detalle.cantidad = detalle_form.cleaned_data['cantidad']
+            factura_detalle.save()
+
             return redirect('detalle_factura', pk=factura.pk)
     else:
-        form = FacturaForm(instance=factura)
+        # Rellena el formulario con los datos actuales
+        detalle_form = DetalleFacturaForm(initial={'producto': detalles.first().producto,
+                                                   'cantidad': detalles.first().cantidad})
 
-    return render(request, 'factura/editar_factura.html', {'form': form, 'factura': factura})
+    return render(request, 'factura/editar_factura.html', {'factura': factura, 'detalle_form': detalle_form})
+
 
 def eliminar_factura(request, pk):
     factura = get_object_or_404(Factura, pk=pk)

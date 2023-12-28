@@ -2,7 +2,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h2>Detalles de la Factura #{{ factura.pk }}</h2>
+    <h2>Detalles de la Factura</h2>
 
     <p><strong>Cliente:</strong> {{ factura.cliente.nombre }} (NIT: {{ factura.cliente.nit }})</p>
     <p><strong>Dirección del Cliente:</strong> {{ factura.cliente.direccion }}</p>
